@@ -1,0 +1,12 @@
+{
+  "name": "nging",
+  "description": "nging game engine for javascript",
+  "version": "1.0.0",
+  "author": "Romano Schoonheim",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}
