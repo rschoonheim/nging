@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Romano Schoonheim",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "devDependencies": {
     "typescript": "^5.5.4"

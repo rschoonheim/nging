@@ -5,3 +5,7 @@
 # Node-Related files
 #
 node_modules/
+
+# Typescript-Related files
+#
+dist/
