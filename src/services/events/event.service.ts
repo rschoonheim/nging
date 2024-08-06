@@ -1,6 +1,11 @@
 import ServiceInterface from "../../interfaces/service.interface";
 import {Channels} from "./channel/channels.service";
 import type {Event} from "./event.types";
+import Nging from "../../nging";
+
+// Define constants for errors that can occur in the EventService class.
+//
+const EVENT_SERVICE_ERROR_CHANNEL_NAME_ALREADY_REGISTERED = `CHANNEL_NAME_ALREADY_REGISTERED`;
 
 export default class EventService implements ServiceInterface{
     /**
@@ -8,9 +13,26 @@ export default class EventService implements ServiceInterface{
      */
     private readonly channels: Channels = new Channels();
 
-    async start(): Promise<void> {
-        this.channels.register("input");
-        this.channels.register("webgl");
+    async start(nging: Nging): Promise<void> {
+        console.log("Event service started");
+    }
+
+    /**
+     * @description Registers a new channel.
+     *
+     * @param {string} channelName - The channel to register
+     *
+     * @returns {this}
+     */
+    register(channelName: string): this {
+        // Check if the channel is already registered
+        //
+        if (this.channels.exists(channelName)) {
+            throw new Error(EVENT_SERVICE_ERROR_CHANNEL_NAME_ALREADY_REGISTERED);
+        }
+
+        this.channels.register(channelName);
+        return this;
     }
 
     /**

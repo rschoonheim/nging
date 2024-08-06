@@ -30,6 +30,18 @@ export default class Nging {
         }
     }
 
+    events(): EventService {
+        return this.services.events;
+    }
+
+    input(): InputService {
+        return this.services.input;
+    }
+
+    webgl(): WebglService {
+        return this.services.webgl;
+    }
+
     /**
      * @description Updates the canvas dimensions.
      *
@@ -70,9 +82,9 @@ export default class Nging {
         // Start services
         //
         const startServices = async () => {
-            await this.services.events.start();
-            await this.services.input.start();
-            await this.services.webgl.start();
+            await this.services.events.start(this);
+            await this.services.input.start(this);
+            await this.services.webgl.start(this);
         }
         await startServices();
 
@@ -87,4 +99,7 @@ export default class Nging {
         requestAnimationFrame(() => this.render());
     }
 
+    addCanvasEventListener(mousemove: string, handleMousemove1: OmitThisParameter<(event: Event) => void>) {
+        this.canvas.element.html.addEventListener(mousemove, handleMousemove1);
+    }
 }

@@ -55,4 +55,8 @@ export class Channels {
         channel.publish(event);
         return this;
     }
+
+    public exists(channel: string) {
+        return this.channels.has(channel);
+    }
 }

@@ -1,3 +1,5 @@
+import Nging from "../nging";
+
 export default interface ServiceInterface {
-    start(): void;
+    start(nging: Nging): void;
 }
