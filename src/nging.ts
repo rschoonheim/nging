@@ -70,9 +70,9 @@ export default class Nging {
         // Start services
         //
         const startServices = async () => {
-            this.services.events.start();
-            this.services.input.start();
-            this.services.webgl.start();
+            await this.services.events.start();
+            await this.services.input.start();
+            await this.services.webgl.start();
         }
         await startServices();
 

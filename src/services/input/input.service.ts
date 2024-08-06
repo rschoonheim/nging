@@ -1,7 +1,7 @@
 import ServiceInterface from "../../interfaces/service.interface";
 
 export default class InputService implements ServiceInterface{
-    start(): void {
+    async start(): Promise<void> {
         console.log("Input service started");
     }
 }

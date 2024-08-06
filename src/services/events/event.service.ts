@@ -8,7 +8,7 @@ export default class EventService implements ServiceInterface{
      */
     private readonly channels: Channels = new Channels();
 
-    start(): void {
+    async start(): Promise<void> {
         this.channels.register("input");
         this.channels.register("webgl");
     }
