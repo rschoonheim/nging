@@ -73,10 +73,6 @@ export default class Nging {
             this.services.events.start();
             this.services.input.start();
             this.services.webgl.start();
-
-            this.services.events.subscribe("input", (event: any) => {
-                console.log(event);
-            });
         }
         await startServices();
 
