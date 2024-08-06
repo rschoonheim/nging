@@ -13,9 +13,13 @@ export default class Nging {
 
     /**
      * @description Collection of services running.
-     * @type {[key: string]: ServiceInterface}
+     * @type {Object}
      */
-    private services: { [key: string]: ServiceInterface } = {};
+    private services: {
+        events: EventService,
+        input: InputService,
+        webgl: WebglService,
+    };
 
     constructor(canvas: Canvas) {
         this.canvas = canvas;
@@ -66,8 +70,12 @@ export default class Nging {
         // Start services
         //
         const startServices = async () => {
-            Object.keys(this.services).forEach((key: string) => {
-                this.services[key].start();
+            this.services.events.start();
+            this.services.input.start();
+            this.services.webgl.start();
+
+            this.services.events.subscribe("input", (event: any) => {
+                console.log(event);
             });
         }
         await startServices();
@@ -79,6 +87,7 @@ export default class Nging {
      * @description Render loop.
      */
     public async render(): Promise<void> {
+
         requestAnimationFrame(() => this.render());
     }
 

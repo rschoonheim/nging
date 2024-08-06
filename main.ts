@@ -17,6 +17,8 @@ nging.start().then(() => {
     //
     nging.render();
 }).catch((error: any) => {
+    // Starting nging processes has failed,
+    // log the error.
     console.error(error);
 });
 
