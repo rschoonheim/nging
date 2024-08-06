@@ -1,4 +1,8 @@
-import type {Canvas} from "./html/canvas";
+import type {Canvas} from "./utilities/html/canvas";
+import EventService from "./services/events/event.service";
+import InputService from "./services/input/input.service";
+import WebglService from "./services/webgl/webgl.service";
+import ServiceInterface from "./interfaces/service.interface";
 
 export default class Nging {
     /**
@@ -7,8 +11,19 @@ export default class Nging {
      */
     private canvas: Canvas;
 
+    /**
+     * @description Collection of services running.
+     * @type {[key: string]: ServiceInterface}
+     */
+    private services: { [key: string]: ServiceInterface } = {};
+
     constructor(canvas: Canvas) {
         this.canvas = canvas;
+        this.services = {
+            events: new EventService(),
+            input: new InputService(),
+            webgl: new WebglService(),
+        }
     }
 
     /**
@@ -48,6 +63,15 @@ export default class Nging {
      * @description Start nging processes.
      */
     public async start(): Promise<void> {
+        // Start services
+        //
+        const startServices = async () => {
+            Object.keys(this.services).forEach((key: string) => {
+                this.services[key].start();
+            });
+        }
+        await startServices();
+
         return Promise.resolve();
     }
 

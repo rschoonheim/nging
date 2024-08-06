@@ -1,4 +1,4 @@
-import {createCanvas} from "./src/html/canvas";
+import {createCanvas} from "./src/utilities/html/canvas";
 import Nging from "./src/nging";
 
 const canvas = createCanvas("canvas");
