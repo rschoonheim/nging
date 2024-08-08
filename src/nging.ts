@@ -2,44 +2,53 @@ import type {Canvas} from "./utilities/html/canvas";
 import EventService from "./services/events/event.service";
 import InputService from "./services/input/input.service";
 import WebglService from "./services/webgl/webgl.service";
-import ServiceInterface from "./interfaces/service.interface";
+import ServiceContainer from "./ServiceContainer";
 
 export default class Nging {
+
+    /**
+     * @description List of services that will be registered by default.
+     * @type {{[key: string]: any}}
+     */
+    private readonly defaultServices: {[key: string]: any} = {
+        "events": EventService,
+        "input": InputService,
+        "webgl": WebglService
+    }
+
+    /**
+     * @description Service Container
+     * @type {ServiceContainer}
+     */
+    private readonly services: ServiceContainer = new ServiceContainer();
+
     /**
      * @description The canvas where we will draw on.
      * @type {Canvas}
      */
     private canvas: Canvas;
 
-    /**
-     * @description Collection of services running.
-     * @type {Object}
-     */
-    private services: {
-        events: EventService,
-        input: InputService,
-        webgl: WebglService,
-    };
-
     constructor(canvas: Canvas) {
         this.canvas = canvas;
-        this.services = {
-            events: new EventService(),
-            input: new InputService(),
-            webgl: new WebglService(),
+        this.registerDefaultServices();
+    }
+
+    private registerDefaultServices(): void {
+        for (const [name, service] of Object.entries(this.defaultServices)) {
+            this.services.add(name, this.services.make(service));
         }
     }
 
-    events(): EventService {
-        return this.services.events;
+    public events(): EventService {
+        return this.services.get("events") as EventService;
     }
 
-    input(): InputService {
-        return this.services.input;
+    public input(): InputService {
+        return this.services.get("input") as InputService;
     }
 
-    webgl(): WebglService {
-        return this.services.webgl;
+    public webgl(): WebglService {
+        return this.services.get("webgl") as WebglService;
     }
 
     /**
@@ -75,31 +84,25 @@ export default class Nging {
         return this;
     }
 
-    /**
-     * @description Start nging processes.
-     */
     public async start(): Promise<void> {
         // Start services
         //
         const startServices = async () => {
-            await this.services.events.start(this);
-            await this.services.input.start(this);
-            await this.services.webgl.start(this);
+            await this.services.get("events").start(this);
+            await this.services.get("input").start(this);
+            await this.services.get("webgl").start(this);
         }
         await startServices();
 
         return Promise.resolve();
     }
 
-    /**
-     * @description Render loop.
-     */
     public async render(): Promise<void> {
 
         requestAnimationFrame(() => this.render());
     }
 
-    addCanvasEventListener(mousemove: string, handleMousemove1: OmitThisParameter<(event: Event) => void>) {
+    public addCanvasEventListener(mousemove: string, handleMousemove1: OmitThisParameter<(event: Event) => void>) {
         this.canvas.element.html.addEventListener(mousemove, handleMousemove1);
     }
 }

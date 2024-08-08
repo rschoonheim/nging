@@ -1,7 +1,7 @@
 {
   "name": "nging",
   "type": "commonjs",
-  "main": "main.ts",
+  "main": "project/game.ts",
   "types": "dist/nging.d.ts",
   "typings": "dist/nging.d.ts",
   "description": "nging game engine for javascript",

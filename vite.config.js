@@ -1,6 +1,14 @@
-// vite.config.js
-export default {
+import {defineConfig} from 'vite'
+
+export default defineConfig({
     build: {
-        target: 'es2015',
-    }
-}
+        rollupOptions: {
+            input: {
+                app: './project/index.html',
+            },
+        },
+    },
+    server: {
+        open: './project/index.html',
+    },
+})

@@ -22,6 +22,8 @@ export default class InputService implements ServiceInterface {
 
         nging.addCanvasEventListener("mousemove", this.handleMousemove.bind(this));
         nging.addCanvasEventListener("wheel", this.handleWheel.bind(this));
+
+        console.log("Input service started");
     }
 
     handleWheel(event: Event): void {

@@ -1,8 +1,15 @@
-import {createCanvas} from "./src/utilities/html/canvas";
-import Nging from "./src/nging";
+import {createCanvas} from "../src/utilities/html/canvas";
+import Nging from "../src/nging";
 
+// Define properties for nging.
+//
 const canvas = createCanvas("canvas");
+if (!canvas) {
+    throw new Error("Canvas could not be created.");
+}
 const nging = new Nging(canvas);
+
+
 
 // Canvas setup
 //
@@ -21,5 +28,3 @@ nging.start().then(() => {
     // log the error.
     console.error(error);
 });
-
-
