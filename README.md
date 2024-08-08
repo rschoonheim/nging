@@ -20,6 +20,8 @@ games.
 ## How the event system works
 In this section, we dive into the inner workings of the event system.
 
+![event_system_structure.png](docs%2Fevent_system_structure.png)
+
 ## How to use the event system  
 In this section, we will learn how to use the event system effectively in your game objects.
 
