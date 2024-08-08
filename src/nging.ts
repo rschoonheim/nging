@@ -2,7 +2,7 @@ import type {Canvas} from "./utilities/html/canvas";
 import EventService from "./services/events/event.service";
 import InputService from "./services/input/input.service";
 import WebglService from "./services/webgl/webgl.service";
-import ServiceContainer from "./ServiceContainer";
+import ServiceContainer from "./serviceContainer";
 
 export default class Nging {
 
